@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import MessageBubble from './MessageBubble'
-import { Message, UserLevel, CEFRLevel, PracticeSession } from '@/types'
+import { Message, UserLevel, CEFRLevel, SpeechRecognitionInterface, SpeechRecognitionEvent, SpeechRecognitionErrorEvent } from '@/types'
 import { setItemSafe, getItemSafe, setItemDebounced, truncateMessages, clearAppStorage } from '@/utils/localStorage'
 import { postJsonWithRetry } from '@/utils/apiRetry'
 import { validateAndSanitizeMessage } from '@/utils/sanitize'
@@ -25,10 +25,9 @@ export default function ChatInterface() {
   const [lastPracticeDate, setLastPracticeDate] = useState<string | null>(null)
   const [practiceMode, setPracticeMode] = useState<string>(PRACTICE_MODES.FREE_TALK)
   const [showSettings, setShowSettings] = useState(false)
-  const [currentSession, setCurrentSession] = useState<PracticeSession | null>(null)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const recognitionRef = useRef<any>(null)
+  const recognitionRef = useRef<SpeechRecognitionInterface | null>(null)
   const messagesRef = useRef<Message[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -81,13 +80,13 @@ Try saying: "Hi, I want to practice English!" or start with any topic you like. 
         recognitionRef.current.interimResults = SPEECH_CONFIG.INTERIM_RESULTS
         recognitionRef.current.lang = SPEECH_CONFIG.LANG
 
-        recognitionRef.current.onresult = (event: any) => {
+        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
           const transcript = event.results[0][0].transcript
           setInput(transcript)
           setIsListening(false)
         }
 
-        recognitionRef.current.onerror = (event: any) => {
+        recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent) => {
           console.error('Speech recognition error:', event.error)
           setIsListening(false)
         }

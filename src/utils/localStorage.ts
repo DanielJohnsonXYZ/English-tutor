@@ -2,7 +2,7 @@
 
 import { STORAGE_CONFIG } from '@/constants/app'
 
-let debounceTimers: Map<string, NodeJS.Timeout> = new Map()
+const debounceTimers: Map<string, NodeJS.Timeout> = new Map()
 
 /**
  * Estimate size of data in MB

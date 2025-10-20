@@ -36,7 +36,7 @@ export async function fetchWithRetry(
       const response = await fetch(url, options)
 
       // If response is ok or not retryable, return it
-      if (response.ok || !retryableStatusCodes.includes(response.status)) {
+      if (response.ok || !(retryableStatusCodes as readonly number[]).includes(response.status)) {
         return response
       }
 
