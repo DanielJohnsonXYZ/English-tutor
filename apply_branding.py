@@ -1,4 +1,5 @@
-@tailwind base;
+# Apply proper CSS with branding colors
+css_content = """@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -76,6 +77,12 @@
   background-color: #ffffff;
 }
 
-.hover\:bg-blue-600:hover {
+.hover\\:bg-blue-600:hover {
   background-color: #2563eb;
 }
+"""
+
+with open('src/app/globals.css', 'w') as f:
+    f.write(css_content)
+
+print("CSS branding applied successfully!")
