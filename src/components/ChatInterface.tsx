@@ -337,17 +337,17 @@ Try saying: "Hi, I want to practice English!" or start with any topic you like. 
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <header className="bg-white shadow-md border-b border-gray-200 px-4 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="text-3xl">📚</div>
+            <div className="text-4xl">📚</div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-gray-900">
                 English Tutor 英语导师
               </h1>
-              <p className="text-sm text-gray-600">
+              <p className="text-base text-gray-600 font-medium">
                 {userLevel ? `Level: ${userLevel.level}` : 'Let\'s practice!'}
               </p>
             </div>
@@ -440,7 +440,7 @@ Try saying: "Hi, I want to practice English!" or start with any topic you like. 
               key={idx}
               onClick={() => sendMessage(action.text)}
               disabled={isLoading}
-              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors disabled:opacity-50"
+              className="px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 text-gray-800 rounded-full text-sm font-medium hover:from-gray-100 hover:to-gray-200 hover:shadow-md active:scale-95 transition-all duration-200 disabled:opacity-50 border border-gray-200"
             >
               {action.emoji} {action.label}
             </button>
@@ -476,7 +476,7 @@ Try saying: "Hi, I want to practice English!" or start with any topic you like. 
             onKeyPress={handleKeyPress}
             placeholder="Type in English... 用英语输入..."
             disabled={isLoading}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+            className="flex-1 px-5 py-4 text-base border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-3 focus:ring-blue-400 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
             maxLength={INPUT_CONSTRAINTS.MAX_MESSAGE_LENGTH}
           />
 
@@ -484,7 +484,7 @@ Try saying: "Hi, I want to practice English!" or start with any topic you like. 
           <button
             onClick={() => sendMessage()}
             disabled={isLoading || !input.trim()}
-            className="px-6 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+            className="px-8 py-4 bg-blue-600 text-white text-base rounded-xl hover:bg-blue-700 hover:shadow-lg active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-semibold shadow-md"
           >
             Send 发送
           </button>
