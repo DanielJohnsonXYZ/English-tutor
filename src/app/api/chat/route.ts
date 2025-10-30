@@ -216,14 +216,14 @@ export async function POST(request: NextRequest) {
 
     // Provide more detailed error information for debugging
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    const errorDetails = error instanceof Error && 'status' in error
-      ? ` (Status: ${(error as any).status})`
-      : ''
+    const errorStatus = error instanceof Error && 'status' in error
+      ? (error as { status: number }).status
+      : null
 
     console.error('Error details:', {
       message: errorMessage,
       type: error instanceof Error ? error.constructor.name : typeof error,
-      details: errorDetails
+      status: errorStatus
     })
 
     return NextResponse.json(
