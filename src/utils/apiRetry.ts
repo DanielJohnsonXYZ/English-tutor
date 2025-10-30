@@ -50,8 +50,9 @@ export async function fetchWithRetry(
         continue
       }
 
-      // Last attempt, return the response even if it's an error
-      return response
+      // Last attempt with retryable status - we should throw instead of return
+      // This ensures callers know the request failed
+      throw lastError
 
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error))

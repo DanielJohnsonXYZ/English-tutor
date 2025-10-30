@@ -3,7 +3,7 @@
 // API Configuration
 export const API_CONFIG = {
   MAX_TOKENS: 1200,
-  MODEL: 'claude-3-5-sonnet-20241022',
+  MODEL: 'claude-sonnet-4-20250514',
   MAX_HISTORY_MESSAGES: 25,
   RETRY_ATTEMPTS: 3,
   RETRY_INITIAL_DELAY: 1000,

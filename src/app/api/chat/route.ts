@@ -213,8 +213,24 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ response: responseText })
   } catch (error) {
     console.error('Claude API error:', error)
+
+    // Provide more detailed error information for debugging
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    const errorDetails = error instanceof Error && 'status' in error
+      ? ` (Status: ${(error as any).status})`
+      : ''
+
+    console.error('Error details:', {
+      message: errorMessage,
+      type: error instanceof Error ? error.constructor.name : typeof error,
+      details: errorDetails
+    })
+
     return NextResponse.json(
-      { error: 'Failed to get response. 无法获取响应。' },
+      {
+        error: 'Failed to get response. 无法获取响应。',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      },
       { status: 500 }
     )
   }
